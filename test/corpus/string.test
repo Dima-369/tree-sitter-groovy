@@ -1,0 +1,151 @@
+==========
+Basic double quoted string
+==========
+x = "hello world"
+---
+
+(program
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (string_literal
+        (string_fragment)))))
+
+==========
+Escape sequences
+==========
+x = "hello\\world"
+y = "hello\"world"
+z = "hello \uff00 world"
+---
+
+(program
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (string_literal
+        (string_fragment)
+        (escape_sequence)
+        (string_fragment))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (string_literal
+        (string_fragment)
+        (escape_sequence)
+        (string_fragment))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (string_literal
+        (string_fragment)
+        (escape_sequence)
+        (string_fragment)))))
+
+==========
+interpolation
+==========
+x = "hello ${name}"
+x = "hello ${3 + 4 * 2}!"
+x = "hello \${3 + 4 * 2}"
+---
+
+(program
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (string_literal
+        (string_fragment))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (string_literal
+        (string_fragment))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (string_literal
+        (string_fragment)
+        (escape_sequence)
+        (string_fragment)))))
+
+==========
+Multiline string
+==========
+x = """"""
+y = """
+this is a multiline string with "quotes" inside
+as well as ""double quotes""
+escapes \$
+plain backslashes \
+and ${interpolation}
+"""
+---
+
+(program
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (string_literal)))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (string_literal
+        (multiline_string_fragment)
+        (multiline_string_fragment)
+        (multiline_string_fragment)
+        (multiline_string_fragment)
+        (multiline_string_fragment)
+        (multiline_string_fragment)
+        (multiline_string_fragment)
+        (multiline_string_fragment)
+        (multiline_string_fragment)))))
+
+==========
+Multiline edge case trailing quotes before interpolation
+==========
+print("""hello world ""${0}""")
+---
+
+(program
+  (expression_statement
+    (method_invocation
+      name: (identifier)
+      arguments: (argument_list
+        (string_literal
+          (multiline_string_fragment)
+          (multiline_string_fragment)
+          (multiline_string_fragment))))))
+
+==========
+Single quoted string
+==========
+x = 'a + b \' + c'
+y = 'a + $3'
+---
+
+(program
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (character_literal)))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (character_literal))))
+
+==========
+Multiline single quoted string
+==========
+x = '''multiline string " with
+a bunch'' of quotes'''
+---
+
+(program
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (string_literal
+        (multiline_string_fragment)
+        (multiline_string_fragment)
+        (multiline_string_fragment)))))

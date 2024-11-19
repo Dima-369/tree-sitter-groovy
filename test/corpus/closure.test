@@ -1,0 +1,97 @@
+==========
+Closure with no args, no arrow, function call in body
+==========
+def myClosure = {
+       foo()
+}
+---
+
+(program
+  (local_variable_declaration
+    (variable_declarator
+      (identifier)
+      (closure
+        (expression_statement
+          (method_invocation
+            (identifier)
+            (argument_list)))))))
+
+==========
+Closure with no args, no arrow, integer literal expression in body
+==========
+def myClosure = {
+       1
+}
+---
+
+(program
+  (local_variable_declaration
+    (variable_declarator
+      (identifier)
+      (closure
+        (expression_statement
+          (decimal_integer_literal))))))
+
+==========
+Closure with no args, arrow, function call in body
+==========
+def myClosure = {
+       -> 
+       foo()
+}
+---
+
+(program
+  (local_variable_declaration
+    (variable_declarator
+      (identifier)
+      (closure
+        (expression_statement
+          (lambda_expression
+            (method_invocation
+              (identifier)
+              (argument_list))))))))
+
+==========
+Closure with one arg
+==========
+def myClosure = {
+       a -> 
+       y = a
+}
+---
+
+(program
+  (local_variable_declaration
+    (variable_declarator
+      (identifier)
+      (closure
+        (expression_statement
+          (lambda_expression
+            (identifier)
+            (assignment_expression
+              (identifier)
+              (identifier))))))))
+
+==========
+Closure with multiple args
+==========
+def myClosure = {
+       a, b ->
+       y = a + b
+}
+---
+
+(program
+  (local_variable_declaration
+    (variable_declarator
+      (identifier)
+      (array_initializer
+        (identifier)
+        (lambda_expression
+          (identifier)
+          (assignment_expression
+            (identifier)
+            (binary_expression
+              (identifier)
+              (identifier))))))))

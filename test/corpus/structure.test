@@ -1,0 +1,121 @@
+==========
+Basic program structure
+==========
+def a = 1
+String b = 2
+pipeline {}
+---
+
+(program
+  (local_variable_declaration
+    declarator: (variable_declarator
+      name: (identifier)
+      value: (decimal_integer_literal)))
+  (local_variable_declaration
+    type: (type_identifier)
+    declarator: (variable_declarator
+      name: (identifier)
+      value: (decimal_integer_literal)))
+  (expression_statement
+    (method_invocation
+      name: (identifier)
+      body: (closure))))
+
+==========
+Jenkins-specific structure
+==========
+pipeline {
+  agent none
+  stages {
+    stage("hello world") {
+      steps {
+        sh abc
+        sh "hello world"
+      }
+    }
+    stage("Script") {
+      steps {
+        script {
+          def foo = bar
+        }
+      }
+    }
+  }
+}
+---
+
+(program
+  (expression_statement
+    (method_invocation
+      name: (identifier)
+      body: (closure
+        (local_variable_declaration
+          type: (type_identifier)
+          declarator: (variable_declarator
+            name: (identifier)))
+        (expression_statement
+          (method_invocation
+            name: (identifier)
+            body: (closure
+              (expression_statement
+                (method_invocation
+                  name: (identifier)
+                  arguments: (argument_list
+                    (string_literal
+                      (string_fragment)))
+                  body: (closure
+                    (expression_statement
+                      (method_invocation
+                        name: (identifier)
+                        body: (closure
+                          (local_variable_declaration
+                            type: (type_identifier)
+                            declarator: (variable_declarator
+                              name: (identifier)))
+                          (juxt_function_call
+                            name: (identifier)
+                            args: (argument_list
+                              (string_literal
+                                (string_fragment))))))))))
+              (expression_statement
+                (method_invocation
+                  name: (identifier)
+                  arguments: (argument_list
+                    (string_literal
+                      (string_fragment)))
+                  body: (closure
+                    (expression_statement
+                      (method_invocation
+                        name: (identifier)
+                        body: (closure
+                          (expression_statement
+                            (method_invocation
+                              name: (identifier)
+                              body: (closure
+                                (local_variable_declaration
+                                  declarator: (variable_declarator
+                                    name: (identifier)
+                                    value: (identifier)))))))))))))))))))
+
+==========
+Jenkins-import underscore
+==========
+@Library('my-library') _
+
+pipeline {
+}
+---
+
+(program
+  (local_variable_declaration
+    (modifiers
+      (annotation
+        (identifier)
+        (annotation_argument_list
+          (character_literal))))
+    (variable_declarator
+      (underscore_pattern)))
+  (expression_statement
+    (method_invocation
+      (identifier)
+      (closure))))

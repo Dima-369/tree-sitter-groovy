@@ -1,0 +1,60 @@
+==========
+Basic declaration
+==========
+String x = "hello"
+---
+
+(program
+  (local_variable_declaration
+    type: (type_identifier)
+    declarator: (variable_declarator
+      name: (identifier)
+      value: (string_literal
+        (string_fragment)))))
+
+==========
+Generic type
+==========
+Map<string, int> m
+---
+
+(program
+  (local_variable_declaration
+    type: (generic_type
+      (type_identifier)
+      (type_arguments
+        (type_identifier)
+        (integral_type)))
+    declarator: (variable_declarator
+      name: (identifier))))
+
+==========
+Array type
+==========
+int[][] x = [[]]
+---
+
+(program
+  (local_variable_declaration
+    type: (array_type
+      element: (integral_type)
+      dimensions: (dimensions))
+    declarator: (variable_declarator
+      name: (identifier)
+      value: (array_literal
+        (array_literal)))))
+
+==========
+Declare without explicit type or def
+==========
+@Field final myvar = 'hello'
+---
+
+(program
+  (local_variable_declaration
+    (modifiers
+      (marker_annotation
+        name: (identifier)))
+    declarator: (variable_declarator
+      name: (identifier)
+      value: (character_literal))))

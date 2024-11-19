@@ -1,0 +1,43 @@
+==========
+Basic List literals
+==========
+def canon = [1, 2, "hello", "world"]
+def empty = []
+def trailing = [1, 2, 3,]
+def nested = ["hello", ["world", ["three"]]]
+---
+
+(program
+  (local_variable_declaration
+    declarator: (variable_declarator
+      name: (identifier)
+      value: (array_literal
+        (decimal_integer_literal)
+        (decimal_integer_literal)
+        (string_literal
+          (string_fragment))
+        (string_literal
+          (string_fragment)))))
+  (local_variable_declaration
+    declarator: (variable_declarator
+      name: (identifier)
+      value: (array_literal)))
+  (local_variable_declaration
+    declarator: (variable_declarator
+      name: (identifier)
+      value: (array_literal
+        (decimal_integer_literal)
+        (decimal_integer_literal)
+        (decimal_integer_literal))))
+  (local_variable_declaration
+    declarator: (variable_declarator
+      name: (identifier)
+      value: (array_literal
+        (string_literal
+          (string_fragment))
+        (array_literal
+          (string_literal
+            (string_fragment))
+          (array_literal
+            (string_literal
+              (string_fragment))))))))

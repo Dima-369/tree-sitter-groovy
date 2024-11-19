@@ -1,0 +1,42 @@
+==========
+Switch
+==========
+switch(x) {
+  case 1:
+    f()
+  case 24*60:
+    g()
+    break
+  default:
+    h()
+}
+---
+
+(program
+  (switch_expression
+    condition: (parenthesized_expression
+      (identifier))
+    body: (switch_block
+      (switch_block_statement_group
+        (switch_label
+          (decimal_integer_literal))
+        (expression_statement
+          (method_invocation
+            name: (identifier)
+            arguments: (argument_list))))
+      (switch_block_statement_group
+        (switch_label
+          (binary_expression
+            left: (decimal_integer_literal)
+            right: (decimal_integer_literal)))
+        (expression_statement
+          (method_invocation
+            name: (identifier)
+            arguments: (argument_list)))
+        (break_statement))
+      (switch_block_statement_group
+        (switch_label)
+        (expression_statement
+          (method_invocation
+            name: (identifier)
+            arguments: (argument_list)))))))

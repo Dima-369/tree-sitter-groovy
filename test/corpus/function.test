@@ -1,0 +1,181 @@
+==========
+Zero-argument function call
+==========
+hello()
+---
+
+(program
+  (expression_statement
+    (method_invocation
+      name: (identifier)
+      arguments: (argument_list))))
+
+==========
+One-argument function call
+==========
+hello(24)
+hello(24,)
+---
+
+(program
+  (expression_statement
+    (method_invocation
+      name: (identifier)
+      arguments: (argument_list
+        (decimal_integer_literal))))
+  (expression_statement
+    (method_invocation
+      name: (identifier)
+      arguments: (argument_list
+        (decimal_integer_literal)))))
+
+==========
+Map function call
+==========
+hello(foo: bar, hello: world)
+hello(foo: bar, hello: world,)
+---
+
+(program
+  (expression_statement
+    (method_invocation
+      name: (identifier)
+      arguments: (argument_list
+        (map_item
+          key: (identifier)
+          value: (identifier))
+        (map_item
+          key: (identifier)
+          value: (identifier)))))
+  (expression_statement
+    (method_invocation
+      name: (identifier)
+      arguments: (argument_list
+        (map_item
+          key: (identifier)
+          value: (identifier))
+        (map_item
+          key: (identifier)
+          value: (identifier))))))
+
+==========
+Simple function definition
+==========
+def foo() {
+  echo("hello")
+}
+---
+
+(program
+  (function_definition
+    name: (identifier)
+    parameters: (formal_parameters)
+    body: (closure
+      (expression_statement
+        (method_invocation
+          name: (identifier)
+          arguments: (argument_list
+            (string_literal
+              (string_fragment))))))))
+
+==========
+Parameters
+==========
+def foo(int x, Boolean y = false) {
+  println("hi")
+}
+---
+
+(program
+  (function_definition
+    name: (identifier)
+    parameters: (formal_parameters
+      (formal_parameter
+        type: (integral_type)
+        name: (identifier))
+      (formal_parameter
+        type: (type_identifier)
+        name: (identifier)
+        (false)))
+    body: (closure
+      (expression_statement
+        (method_invocation
+          name: (identifier)
+          arguments: (argument_list
+            (string_literal
+              (string_fragment))))))))
+
+==========
+Return
+==========
+def foo() {
+  return 1 + 2
+  return x
+  return
+}
+---
+
+(program
+  (function_definition
+    name: (identifier)
+    parameters: (formal_parameters)
+    body: (closure
+      (return_statement
+        (binary_expression
+          left: (decimal_integer_literal)
+          right: (decimal_integer_literal)))
+      (return_statement
+        (identifier))
+      (return_statement))))
+
+==========
+Juxtaposed function call
+==========
+f arg1: 2, arg2: "hello"
+g 3, 5
+h foo
+sh "hello"
+---
+
+(program
+  (juxt_function_call
+    name: (identifier)
+    args: (argument_list
+      (map_item
+        key: (identifier)
+        value: (decimal_integer_literal))
+      (map_item
+        key: (identifier)
+        value: (string_literal
+          (string_fragment)))))
+  (juxt_function_call
+    name: (identifier)
+    args: (argument_list
+      (decimal_integer_literal)
+      (decimal_integer_literal)))
+  (local_variable_declaration
+    type: (type_identifier)
+    declarator: (variable_declarator
+      name: (identifier)))
+  (juxt_function_call
+    name: (identifier)
+    args: (argument_list
+      (string_literal
+        (string_fragment)))))
+
+==========
+Typed function
+==========
+int foo() {
+  return 4
+}
+---
+
+(program
+  (method_declaration
+    type: (integral_type)
+    name: (identifier)
+    parameters: (formal_parameters)
+    body: (block
+      (return_statement
+        (decimal_integer_literal)))))

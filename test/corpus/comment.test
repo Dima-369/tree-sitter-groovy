@@ -1,0 +1,71 @@
+==========
+Shebang
+==========
+#!/usr/bin/env groovy
+pipeline {
+}
+---
+
+(program
+  (shebang)
+  (expression_statement
+    (method_invocation
+      (identifier)
+      (closure))))
+
+==========
+Single line comment
+==========
+//hello
+x = 5 //TODO
+---
+
+(program
+  (line_comment)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (decimal_integer_literal))
+    (line_comment)))
+
+==========
+Multiline comment
+==========
+/*hello
+* / */
+---
+
+(program
+  (block_comment))
+
+==========
+groovydoc
+==========
+/**
+* hello world
+* @param abc - thing
+* @throws Exc
+* @asdf ghjkl
+* @return
+*/
+x = hi
+---
+
+(program
+  (block_comment)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (identifier))))
+
+==========
+groovydoc with @TEXT
+==========
+/**
+hello world
+@THIS_IS_TEXT @tag
+*/
+---
+
+(program
+  (block_comment))

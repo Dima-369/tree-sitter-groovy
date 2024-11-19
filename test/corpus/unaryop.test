@@ -1,0 +1,22 @@
+==========
+Unary precedence
+==========
+x =  5 ** ++y
+x = ~5 ** y
+---
+
+(program
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (decimal_integer_literal)
+        (update_expression
+          (identifier)))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (unary_expression
+        (binary_expression
+          (decimal_integer_literal)
+          (identifier))))))

@@ -1,0 +1,51 @@
+==========
+Math order of operations
+==========
+x = 1 + 2 * 3 - 2 ** 4
+---
+
+(program
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (binary_expression
+          (decimal_integer_literal)
+          (binary_expression
+            (decimal_integer_literal)
+            (decimal_integer_literal)))
+        (binary_expression
+          (decimal_integer_literal)
+          (decimal_integer_literal))))))
+
+==========
+!in
+==========
+x = 3 * 4 in y
+---
+
+(program
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (binary_expression
+          (decimal_integer_literal)
+          (decimal_integer_literal))
+        (identifier)))))
+
+==========
+Right assoc for **
+==========
+x = 1 ** 2 ** 3
+---
+
+(program
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (decimal_integer_literal)
+        (binary_expression
+          (decimal_integer_literal)
+          (decimal_integer_literal))))))

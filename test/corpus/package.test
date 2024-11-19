@@ -1,0 +1,23 @@
+==========
+Basic package
+==========
+package my_package_name
+
+---
+
+(program
+  (package_declaration
+    (identifier)))
+
+==========
+Package with dotted ident
+==========
+package com.yoursite
+
+---
+
+(program
+  (package_declaration
+    (scoped_identifier
+      (identifier)
+      (identifier))))

@@ -1,0 +1,48 @@
+==========
+Simple ternary expression
+==========
+String x = condition ? "a" : "b"
+---
+
+(program
+  (local_variable_declaration
+    type: (type_identifier)
+    declarator: (variable_declarator
+      name: (identifier)
+      value: (ternary_expression
+        condition: (identifier)
+        consequence: (string_literal
+          (string_fragment))
+        alternative: (string_literal
+          (string_fragment))))))
+
+==========
+Deep ternary expression
+==========
+int y = (x + 3 < 2 ? 0 :
+  (x - 1 == 2 ? 1 : 2)
+)
+---
+
+(program
+  (local_variable_declaration
+    type: (integral_type)
+    declarator: (variable_declarator
+      name: (identifier)
+      value: (parenthesized_expression
+        (ternary_expression
+          condition: (binary_expression
+            left: (binary_expression
+              left: (identifier)
+              right: (decimal_integer_literal))
+            right: (decimal_integer_literal))
+          consequence: (decimal_integer_literal)
+          alternative: (parenthesized_expression
+            (ternary_expression
+              condition: (binary_expression
+                left: (binary_expression
+                  left: (identifier)
+                  right: (decimal_integer_literal))
+                right: (decimal_integer_literal))
+              consequence: (decimal_integer_literal)
+              alternative: (decimal_integer_literal))))))))

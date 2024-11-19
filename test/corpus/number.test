@@ -1,0 +1,33 @@
+==========
+Various numeric literals
+==========
+x = [
+  1,
+  24f,
+  -3,
+  54l,
+  0xff0000,
+  0b010101,
+  0.01,
+  200_000l,
+  6.2e23,
+  1.000_001,
+]
+---
+
+(program
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (array_literal
+        (decimal_integer_literal)
+        (decimal_floating_point_literal)
+        (unary_expression
+          (decimal_integer_literal))
+        (decimal_integer_literal)
+        (hex_integer_literal)
+        (binary_integer_literal)
+        (decimal_floating_point_literal)
+        (decimal_integer_literal)
+        (decimal_floating_point_literal)
+        (decimal_floating_point_literal)))))

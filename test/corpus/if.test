@@ -1,0 +1,78 @@
+==========
+Basic if statement
+==========
+if(x == y) {
+  println("hello world")
+}
+---
+
+(program
+  (if_statement
+    condition: (parenthesized_expression
+      (binary_expression
+        left: (identifier)
+        right: (identifier)))
+    consequence: (closure
+      (expression_statement
+        (method_invocation
+          name: (identifier)
+          arguments: (argument_list
+            (string_literal
+              (string_fragment))))))))
+
+==========
+Else ifs
+==========
+if(a) {
+  f(a)
+} else if (b) {
+  f(b)
+} else {
+  error()
+}
+---
+
+(program
+  (if_statement
+    condition: (parenthesized_expression
+      (identifier))
+    consequence: (closure
+      (expression_statement
+        (method_invocation
+          name: (identifier)
+          arguments: (argument_list
+            (identifier)))))
+    alternative: (if_statement
+      condition: (parenthesized_expression
+        (identifier))
+      consequence: (closure
+        (expression_statement
+          (method_invocation
+            name: (identifier)
+            arguments: (argument_list
+              (identifier)))))
+      alternative: (block
+        (expression_statement
+          (method_invocation
+            name: (identifier)
+            arguments: (argument_list)))))))
+
+==========
+No braces
+==========
+if (x) println(x) else println(y)
+---
+
+(program
+  (if_statement
+    condition: (parenthesized_expression
+      (identifier))
+    consequence: (method_invocation
+      name: (identifier)
+      arguments: (argument_list
+        (identifier)))
+    alternative: (expression_statement
+      (method_invocation
+        name: (identifier)
+        arguments: (argument_list
+          (identifier))))))

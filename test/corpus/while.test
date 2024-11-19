@@ -1,0 +1,43 @@
+==========
+Basic while loop
+==========
+while (x < 5) {
+  print("hello")
+}
+---
+
+(program
+  (while_statement
+    condition: (parenthesized_expression
+      (binary_expression
+        left: (identifier)
+        right: (decimal_integer_literal)))
+    body: (block
+      (expression_statement
+        (method_invocation
+          name: (identifier)
+          arguments: (argument_list
+            (string_literal
+              (string_fragment))))))))
+
+==========
+Do while loop
+==========
+do {
+  print(x--)
+} while (x > 0)
+---
+
+(program
+  (do_statement
+    body: (block
+      (expression_statement
+        (method_invocation
+          name: (identifier)
+          arguments: (argument_list
+            (update_expression
+              (identifier))))))
+    condition: (parenthesized_expression
+      (binary_expression
+        left: (identifier)
+        right: (decimal_integer_literal)))))

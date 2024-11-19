@@ -1,0 +1,126 @@
+==========
+Basic for loop
+==========
+for (int i = 0; i < 10; i++) {
+  println("hello!")
+}
+---
+
+(program
+  (for_statement
+    init: (local_variable_declaration
+      type: (integral_type)
+      declarator: (variable_declarator
+        name: (identifier)
+        value: (decimal_integer_literal)))
+    condition: (binary_expression
+      left: (identifier)
+      right: (decimal_integer_literal))
+    update: (update_expression
+      (identifier))
+    body: (block
+      (expression_statement
+        (method_invocation
+          name: (identifier)
+          arguments: (argument_list
+            (string_literal
+              (string_fragment))))))))
+
+==========
+Multiple initializers and increments
+==========
+for (int x = 0, y = 0; x + y < 10; x++, y *= 2) {
+  println("hello!")
+}
+---
+
+(program
+  (for_statement
+    init: (local_variable_declaration
+      type: (integral_type)
+      declarator: (variable_declarator
+        name: (identifier)
+        value: (decimal_integer_literal))
+      declarator: (variable_declarator
+        name: (identifier)
+        value: (decimal_integer_literal)))
+    condition: (binary_expression
+      left: (binary_expression
+        left: (identifier)
+        right: (identifier))
+      right: (decimal_integer_literal))
+    update: (update_expression
+      (identifier))
+    update: (assignment_expression
+      left: (identifier)
+      right: (decimal_integer_literal))
+    body: (block
+      (expression_statement
+        (method_invocation
+          name: (identifier)
+          arguments: (argument_list
+            (string_literal
+              (string_fragment))))))))
+
+==========
+Infinite loop
+==========
+for (;;) {
+  println("to infinity and beyond")
+}
+---
+
+(program
+  (for_statement
+    body: (block
+      (expression_statement
+        (method_invocation
+          name: (identifier)
+          arguments: (argument_list
+            (string_literal
+              (string_fragment))))))))
+
+==========
+For in expr
+==========
+for (x in m.values()) {
+  print("hello")
+}
+---
+
+(program
+  (enhanced_for_statement
+    name: (identifier)
+    value: (method_invocation
+      object: (identifier)
+      name: (identifier)
+      arguments: (argument_list))
+    body: (block
+      (expression_statement
+        (method_invocation
+          name: (identifier)
+          arguments: (argument_list
+            (string_literal
+              (string_fragment))))))))
+
+==========
+For in range
+==========
+for (x in 1..5) {
+  print("hello")
+}
+---
+
+(program
+  (enhanced_for_statement
+    name: (identifier)
+    value: (range_expression
+      start: (decimal_integer_literal)
+      end: (decimal_integer_literal))
+    body: (block
+      (expression_statement
+        (method_invocation
+          name: (identifier)
+          arguments: (argument_list
+            (string_literal
+              (string_fragment))))))))

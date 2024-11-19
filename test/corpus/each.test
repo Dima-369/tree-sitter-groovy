@@ -1,0 +1,25 @@
+==========
+Basic each loop
+==========
+['11','17','21'].each {
+  println("hello!" + it)
+}
+---
+
+(program
+  (expression_statement
+    (method_invocation
+      object: (array_literal
+        (character_literal)
+        (character_literal)
+        (character_literal))
+      name: (identifier)
+      body: (closure
+        (expression_statement
+          (method_invocation
+            name: (identifier)
+            arguments: (argument_list
+              (binary_expression
+                left: (string_literal
+                  (string_fragment))
+                right: (identifier)))))))))

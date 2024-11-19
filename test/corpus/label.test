@@ -1,0 +1,60 @@
+==========
+Basic labeled statement
+==========
+label: def a = 1;
+---
+
+(program
+  (labeled_statement
+    (identifier)
+    (local_variable_declaration
+      declarator: (variable_declarator
+        name: (identifier)
+        value: (decimal_integer_literal)))))
+
+==========
+Spock test
+==========
+class Test {
+    def testAdd() {
+        when:
+        def a = 10
+        def b = 10
+        def result = a + b
+        then:
+        result == 20
+     }
+}
+---
+
+(program
+  (class_declaration
+    name: (identifier)
+    body: (class_body
+      (method_declaration
+        type: (type_identifier)
+        name: (identifier)
+        parameters: (formal_parameters)
+        body: (block
+          (labeled_statement
+            (identifier)
+            (local_variable_declaration
+              declarator: (variable_declarator
+                name: (identifier)
+                value: (decimal_integer_literal))))
+          (local_variable_declaration
+            declarator: (variable_declarator
+              name: (identifier)
+              value: (decimal_integer_literal)))
+          (local_variable_declaration
+            declarator: (variable_declarator
+              name: (identifier)
+              value: (binary_expression
+                left: (identifier)
+                right: (identifier))))
+          (labeled_statement
+            (identifier)
+            (expression_statement
+              (binary_expression
+                left: (identifier)
+                right: (decimal_integer_literal)))))))))

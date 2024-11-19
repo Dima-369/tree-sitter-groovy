@@ -1,0 +1,28 @@
+==========
+Basic List indexing
+==========
+def a = [1,2,3]
+def b = a[0]
+a[0] = 2
+---
+
+(program
+  (local_variable_declaration
+    declarator: (variable_declarator
+      name: (identifier)
+      value: (array_literal
+        (decimal_integer_literal)
+        (decimal_integer_literal)
+        (decimal_integer_literal))))
+  (local_variable_declaration
+    declarator: (variable_declarator
+      name: (identifier)
+      value: (array_access
+        array: (identifier)
+        index: (decimal_integer_literal))))
+  (expression_statement
+    (assignment_expression
+      left: (array_access
+        array: (identifier)
+        index: (decimal_integer_literal))
+      right: (decimal_integer_literal))))
