@@ -1,3 +1,8 @@
+# Changes
+
+- add dummy `highlights.scm`
+- uncomment `HIGHLIGHTS_QUERY`
+
 ## tree-sitter-groovy
 
 > [!Note]
