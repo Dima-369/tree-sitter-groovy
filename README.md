@@ -1,6 +1,6 @@
 # Changes
 
-- add dummy `highlights.scm`
+- copy `highlights.scm` over from Java grammar which works okayish - there are still many cases which don't work
 - uncomment `HIGHLIGHTS_QUERY`
 
 ## tree-sitter-groovy
